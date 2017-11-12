@@ -1,10 +1,10 @@
 import boto3
 import collections
 import datetime
-import json
+import os
 import itertools
 
-region = 'us-east-1'
+region = os.getenv('region')
 
 def lambda_handler(event, context):
 
@@ -51,7 +51,7 @@ def lambda_handler(event, context):
 
         instance_name = [str(name.get('Value')) for name in instance['Tags']
                          if name['Key'] == 'Name'][0]
-        print(instance_name)
+        print("Instance name: " + instance_name)
 
         for dev in instance['BlockDeviceMappings']:
             if dev.get('Ebs', None) is None:
@@ -87,7 +87,7 @@ def lambda_handler(event, context):
                 Resources=to_tag_mount_point[vol_id],
                 DryRun=False,
                 Tags=[
-                    {'Key': 'Name', 'Value': dev_attachment + " of " + instance_name + " @ " + creation_time_fmt},
+                    {'Key': 'Name', 'Value': creation_time_fmt + " -> " + instance_name + " -> backup partition -> " + dev_attachment},
                 ]
             )
 
