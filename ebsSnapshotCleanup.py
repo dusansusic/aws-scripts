@@ -1,12 +1,10 @@
 import boto3
-import re
 import datetime
-import base64
 import os
-import json
 
-region = 'us-east-1'
-account_id = ['enter_id']
+region = os.getenv('region')
+
+account_id = os.getenv('account_id')
 
 def lambda_handler(event, context):
 
@@ -18,7 +16,7 @@ def lambda_handler(event, context):
             {'Name': 'tag-key', 'Values': ['DeleteOn']},
             {'Name': 'tag-value', 'Values': [delete_on]},
         ]
-        snapshot_response = ec.describe_snapshots(OwnerIds=account_id, Filters=filters)
+        snapshot_response = ec.describe_snapshots(OwnerIds=account_id.split(), Filters=filters)
 
         print "Found %d snapshots that need deleting in region %s on %s" % (
             len(snapshot_response['Snapshots']),
@@ -28,4 +26,3 @@ def lambda_handler(event, context):
         for snap in snapshot_response['Snapshots']:
             print "Deleting snapshot %s" % snap['SnapshotId']
             ec.delete_snapshot(SnapshotId=snap['SnapshotId'])
-
