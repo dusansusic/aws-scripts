@@ -35,7 +35,7 @@ def lambda_handler(event, context):
         try:
             retention_days = [
                 int(t.get('Value')) for t in instance['Tags']
-                if t['Key'] == 'retention'][0]
+                if t['Key'] == 'retention_days'][0]
         except IndexError:
             retention_days = 7
 
