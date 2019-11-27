@@ -6,11 +6,12 @@ As of majority cases, documentation is poor or missing.
 - retention tag should have integer value how long backups are preserved
 
 - Create IAM policy and attach policy to Role. Policy must have next values:
- -  describe_instances
- -  create_snapshot
- -  create_tags
- -  describe_snapshots
- -  delete_snapshot
+ -  DescribeInstances
+ -  CreateSnapshot
+ -  CreateSnapshots
+ -  CreateTags
+ -  DescribeSnapshots
+ -  DeleteSnapshot
 
 ### Create Lambda:
 - pick Author from scratch on right upper side
