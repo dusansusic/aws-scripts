@@ -65,7 +65,7 @@ def lambda_handler(event, context):
                 vol_id, instance['InstanceId'], dev_attachment)
 
             creation_time = datetime.datetime.now()
-            creation_time_fmt = creation_time.strftime("%Y-%m-%d__%H-%M")
+            creation_time_fmt = creation_time.strftime("%Y-%m-%dT%H-%M")
 
             snap = ec.create_snapshot(
                 VolumeId=vol_id,
