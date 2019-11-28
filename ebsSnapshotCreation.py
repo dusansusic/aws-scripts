@@ -87,7 +87,7 @@ def lambda_handler(event, context):
                 Resources=to_tag_mount_point[vol_id],
                 DryRun=False,
                 Tags=[
-                    {'Key': 'Name', 'Value': creation_time_fmt + " -> " + instance_name + " -> backup partition -> " + dev_attachment},
+                    {'Key': 'Name', 'Value': "date: " + creation_time_fmt + ", instance: " + instance_name + ", backup partition: " + dev_attachment},
                 ]
             )
 
